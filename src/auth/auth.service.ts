@@ -77,6 +77,7 @@ export class AuthService {
       });
 
       return {
+        user: sub,
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         token: (await this.login(sub)).access_token,
       };
