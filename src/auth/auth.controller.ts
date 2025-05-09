@@ -10,12 +10,12 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @MessagePattern('auth.register.user')
-  registerUser(@Body() registerUserDto: RegisterUserDto) {
+  registerUser(@Payload() registerUserDto: RegisterUserDto) {
     return this.authService.registerUser(registerUserDto);
   }
 
   @MessagePattern('auth.login.user')
-  async loginUser(@Body() loginUserDto: LoginUserDto) {
+  async loginUser(@Payload() loginUserDto: LoginUserDto) {
     const user = await this.authService.validateUser(loginUserDto);
     if (!user) {
       throw new CustomRpcException(401, 'Unauthorized');
