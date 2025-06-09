@@ -13,4 +13,14 @@ export class UserService {
     const user = await this.userModel.findOne({ email });
     return user || undefined;
   }
+
+  async findUserById(id: string) {
+    const user = await this.userModel.findById(id);
+    if (!user) {
+      return undefined;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...userWithoutPassword } = user.toObject();
+    return userWithoutPassword || undefined;
+  }
 }

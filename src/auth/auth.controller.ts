@@ -1,4 +1,4 @@
-import { Body, Controller } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { CustomRpcException } from 'src/interfaces/ErrorResponse';
@@ -20,7 +20,7 @@ export class AuthController {
     if (!user) {
       throw new CustomRpcException(401, 'Unauthorized');
     }
-    return this.authService.login(user.id.toString());
+    return user;
   }
 
   @MessagePattern('auth.verify.user')
